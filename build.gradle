@@ -1,0 +1,30 @@
+group 'HBV501'
+version '1.0-SNAPSHOT'
+
+
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE'
+        //classpath 'org.webjars:bootstrap:3.2.0'
+    }
+}
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+//apply plugin: 'bootstrap'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '3.2.0'
+
+}
