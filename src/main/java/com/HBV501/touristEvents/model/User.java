@@ -27,6 +27,9 @@ public class User {
 
     private boolean isCompany;
 
+    @OneToMany(mappedBy = "user")
+    private List<Booking> bookings = new ArrayList<>();
+
     public User(){}
 
     public Long getId() {
@@ -77,7 +80,6 @@ public class User {
         this.bookings = bookings;
     }
 
-    @OneToMany(mappedBy = "user")
-    private List<Booking> bookings = new ArrayList<>();
+
 
 }

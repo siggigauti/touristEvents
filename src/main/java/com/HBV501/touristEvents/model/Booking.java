@@ -18,6 +18,7 @@ public class Booking {
     @ManyToOne
     private Event event;
 
+    @ManyToOne
     private User user;
 
     public Booking(){}

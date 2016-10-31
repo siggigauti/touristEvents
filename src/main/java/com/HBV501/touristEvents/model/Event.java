@@ -24,10 +24,10 @@ public class Event {
 
     //Format "2016-12-10 20:30:00"
     @NotNull
-    private LocalDateTime dateStart;
+    private String dateStart;
 
     @NotNull
-    private LocalDateTime dateEnd;
+    private String dateEnd;
 
     @NotNull
     private String description;
@@ -65,19 +65,19 @@ public class Event {
         this.title = title;
     }
 
-    public LocalDateTime getDateStart() {
+    public String getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(LocalDateTime dateStart) {
+    public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
     }
 
-    public LocalDateTime getDateEnd() {
+    public String getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(LocalDateTime dateEnd) {
+    public void setDateEnd(String dateEnd) {
         this.dateEnd = dateEnd;
     }
 
