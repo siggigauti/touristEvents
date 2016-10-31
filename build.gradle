@@ -1,4 +1,4 @@
-group 'HBV501'
+group 'com.HBV501'
 version '1.0-SNAPSHOT'
 
 
@@ -7,15 +7,11 @@ buildscript{
         mavenCentral()
     }
     dependencies{
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE'
-        //classpath 'org.webjars:bootstrap:3.2.0'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE'
     }
 }
 apply plugin: 'java'
 apply plugin: 'spring-boot'
-//apply plugin: 'bootstrap'
-
-sourceCompatibility = 1.5
 
 repositories {
     mavenCentral()
@@ -28,7 +24,5 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.2.1.Final'
     compile 'org.apache.tomcat:tomcat-dbcp:8.0.32'
     compile 'com.h2database:h2:1.4.191'
-    // https://mvnrepository.com/artifact/org.webjars/bootstrap
     compile group: 'org.webjars', name: 'bootstrap', version: '3.2.0'
-
 }
