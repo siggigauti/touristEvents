@@ -2,6 +2,7 @@ package com.HBV501.touristEvents.web.controller;
 
 import com.HBV501.touristEvents.model.Event;
 import com.HBV501.touristEvents.service.EventService;
+import com.HBV501.touristEvents.service.UserService;
 import com.HBV501.touristEvents.web.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ import java.util.List;
  */
 @Controller
 public class eventController {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private EventService eventService;
@@ -74,6 +78,7 @@ public class eventController {
             return "redirect:/events/add";
         }
 
+        event.setOwner(userService.findById(Long.valueOf(1)));
         eventService.save(event);
 
         // TODO: Redirect browser to /categories
