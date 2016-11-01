@@ -17,7 +17,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void save(Event event) {
-
+        eventDao.save(event);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event findById(Long id) {
-        return null;
+        return eventDao.findById(id);
     }
 
     @Override

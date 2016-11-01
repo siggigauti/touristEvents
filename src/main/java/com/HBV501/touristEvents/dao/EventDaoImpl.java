@@ -22,7 +22,20 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public void save(Event event) {
+        // Open a session
+        Session session = sessionFactory.openSession();
 
+        // Begin a transaction
+        session.beginTransaction();
+
+        // Save the category
+        session.saveOrUpdate(event);
+
+        // Commit the transaction
+        session.getTransaction().commit();
+
+        // Close the session
+        session.close();
     }
 
     @Override
@@ -59,7 +72,11 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event findById(Long id) {
-        return null;
+        Session session = sessionFactory.openSession();
+        Event event = session.get(Event.class,id);
+        Hibernate.initialize(event.getBookings());
+        session.close();
+        return event;
     }
 
     @Override

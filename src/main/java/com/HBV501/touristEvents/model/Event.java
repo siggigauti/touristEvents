@@ -40,6 +40,9 @@ public class Event {
     @NotNull
     private String Category;
 
+    @ManyToOne
+    private User owner;
+
     @NotNull
     @Pattern(regexp = "#[0-9a-fA-F]{6}")
     private String colorCode;
@@ -123,6 +126,14 @@ public class Event {
 
     public List<Booking> getBookings() {
         return bookings;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
 }

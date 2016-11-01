@@ -30,6 +30,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Booking> bookings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "owner")
+    private List<Event> events = new ArrayList<>();
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     public User(){}
 
     public Long getId() {
