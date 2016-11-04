@@ -38,6 +38,26 @@ public class eventController {
         return "home";
     }
 
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/")
+    public String HomeEvents(Model model) {
+        // TODO: Get all events
+        List<Event> events = eventService.findAll();
+
+        model.addAttribute("events",events);
+        return "layout";
+    }
+
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/evento")
+    public String addEvents(Model model) {
+        // TODO: Get all events
+        List<Event> events = eventService.findAll();
+
+        model.addAttribute("events",events);
+        return "event/event";
+    }
+
     @RequestMapping("/events/{eventId}")
     public String event(@PathVariable Long eventId, Model model){
         // TODO: Get the event given by eventId

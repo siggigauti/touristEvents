@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: head('index')"></head>
+<body>
+
+<div th:replace="layout :: toppurinn"></div>
+
+<div th:replace="layout :: carousel"></div>
+
+<div class="categories container">
+    <div class="row">
+        <div class="col s9">
+            <h2>Ferðir</h2>
+        </div>
+        <div class="col s3">
+            <a class="right add" href="/events/add">+</a>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div th:each="event : ${events}" class="col s12 l4">
+            <div class="card" th:style="|background-color:${event.colorCode}|">
+                <div class="card-content">
+                    <div class="card-title">
+                        <a class="name" th:href="@{|/events/${event.id}|}" th:text="${event.title}">Category Name</a>
+                        <a class="edit" th:href="@{|/events/${event.id}/edit|}"><i class="hide-on-med-and-down material-icons">more_horiz</i><i class="hide-on-large-only medium material-icons">more_horiz</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout :: scripts"></div>
+</body>
+
+</html>
