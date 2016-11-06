@@ -84,11 +84,11 @@ nav ul li.active, nav ul li:hover {
     color: #757378;
 }
 
-.gifs.container .col:nth-child(3n+1) {
+.event.container .col:nth-child(3n+1) {
     padding-left: 0;
 }
 
-.gifs.container .col:nth-child(3n+3) {
+.event.container .col:nth-child(3n+3) {
     padding-right: 0;
 }
 
@@ -325,7 +325,7 @@ h2 {
     color: #886ab2;
 }
 
-.gifs.container h2 {
+.event.container h2 {
     padding-bottom: 10px;
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 20px;
@@ -605,12 +605,12 @@ label.button {
         width: 100%;
     }
 
-    .gifs.container {
+    .event.container {
         padding: 0;
         margin-top: 1.1rem;
     }
 
-    .gifs.container .col {
+    .event.container .col {
         padding: 0 0.75rem !important;
     }
 

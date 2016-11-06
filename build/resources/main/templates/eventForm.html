@@ -1,13 +1,8 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <title>Event Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" th:href="@{/styles.css}"/>
-    <link href="https://fonts.googleapis.com/css?family=Muli%7CRoboto:400,300,500,700,900" rel="stylesheet"/>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: head('index')"></head>
 <body>
+<div th:replace="layout :: toppurinn"></div>
     <form th:action="@{${action}}" method="post" th:object="${event}">
         <input type="hidden" th:field="*{id}"/>
         <h2 th:text="${heading}">New Event</h2>
@@ -19,13 +14,13 @@
         <input type="text" th:field="*{dateEnd}" placeholder="Event dateEnd"/>
         <input type="text" th:field="*{price}" placeholder="Event price"/>
 
-        <select th:field="*{colorCode}">
+        <select th:field="*{colorCode}" class="cs-select cs-skin-border">
             <option value="" disabled="disabled">Event Color</option>
             <option th:each="color : ${colors}" th:value="${color.hexCode}" th:text="${color.name}" th:style="|color:${color.hexCode}|">Aqua</option>
         </select>
         <button th:text="${submit}" type="submit" class="button">Add</button>
         <a th:href="@{/categories}" class="button">Cancel</a>
     </form>
-
+<div th:replace="layout :: scripts"></div>
 </body>
 </html>

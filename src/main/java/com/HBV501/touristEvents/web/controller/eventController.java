@@ -1,6 +1,8 @@
 package com.HBV501.touristEvents.web.controller;
 
+import com.HBV501.touristEvents.model.Booking;
 import com.HBV501.touristEvents.model.Event;
+import com.HBV501.touristEvents.model.User;
 import com.HBV501.touristEvents.service.EventService;
 import com.HBV501.touristEvents.service.UserService;
 import com.HBV501.touristEvents.web.Color;
@@ -37,7 +39,7 @@ public class eventController {
         List<Event> events = eventService.findAll();
 
         model.addAttribute("events",events);
-        return "home";
+        return "event/event";
     }
 
     @SuppressWarnings("unchecked")
@@ -51,14 +53,16 @@ public class eventController {
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping("/evento")
-    public String addEvents(Model model) {
+    @RequestMapping("/event/booked")
+    public String bookEvents(Model model) {
         // TODO: Get all events
         List<Event> events = eventService.findAll();
-
+        List<User> user = userService.findAll();
         model.addAttribute("events",events);
-        return "event/event";
+        model.addAttribute("user", user);
+        return "event/booked";
     }
+
 
     @RequestMapping("/events/{eventId}")
     public String event(@PathVariable Long eventId, Model model){
@@ -84,8 +88,21 @@ public class eventController {
 
         return "eventForm";
     }
+    @RequestMapping("event/book")
+    public String bookNewEvent(Model model) {
+        // TODO: Add model attributes needed for new form
+        if(!model.containsAttribute("event")) {
+            model.addAttribute("event",new Event());
+        }
+        model.addAttribute("colors", Color.values());
+        model.addAttribute("action","/");
+        model.addAttribute("heading","New Book");
+        model.addAttribute("submit","Book");
 
-    // Add a category
+        return "event/booked";
+    }
+
+    // Add a event
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public String addCategory(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes) {
         // TODO: Add category if valid data was received
@@ -106,6 +123,8 @@ public class eventController {
         // TODO: Redirect browser to /categories
         return "redirect:/events";
     }
+
+
 
     // Form for editing an existing category
     @RequestMapping("events/{eventId}/edit")

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: head('index')"></head>
+<body>
+
+<div th:replace="layout :: toppurinn"></div>
+
+
+<h2>Thank you for booking</h2>
+<div class="event container">
+    <h2 th:text="${event.title}" th:style="|color:${event.colorCode}|"></h2>
+    <div class="row">
+        <div th:each="user : ${user}" class="col s12 l4">
+            <p th:text="${user.name}">Not working?</p>
+            <p th:text="${user.email}">Not working?</p>
+            <p th:text="${user.country}">Not working?</p>
+        </div>
+        <div th:each="event : ${event}" class="col s12 l4">
+            <a th:href="@{|/event/${event.id}|}">   </a>
+            <p th:text="${event.title}">Not working?</p>
+            <p th:text="${event.description}">Not working?</p>
+            <p th:text="${event.price}">Not working?</p>
+        </div>
+    </div>
+</div>
+<div th:replace="layout :: scripts"></div>
+</body>
+
+</html>
