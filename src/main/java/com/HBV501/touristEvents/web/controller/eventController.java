@@ -11,9 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +67,7 @@ public class eventController {
 
         model.addAttribute("event", event);
 
-        return "eventDetails";
+        return "event/info";
     }
 
     // Form for adding a new event
@@ -105,9 +107,34 @@ public class eventController {
         return "redirect:/events";
     }
 
+    // Form for editing an existing category
+    @RequestMapping("events/{eventId}/edit")
+    public String EditEventForm(@PathVariable Long eventId, Model model) {
+        // TODO: Add model attributes needed for new form
+        if(!model.containsAttribute("event")) {
+            model.addAttribute("event",eventService.findById(eventId));
+        }
+        model.addAttribute("colors", Color.values());
+        model.addAttribute("action",String.format("/event/%s",eventId));
+        model.addAttribute("heading","Edit Event");
+        model.addAttribute("submit","Update");
+
+        return "eventForm";
+    }
+
+
     @RequestMapping("/test")
     public String testPage() {
         //Þetta home er nafn á html skjali undir resources/templates. Öll html skjöl verða þar.
         return "testFile";
+    }
+
+    @RequestMapping("/search")
+    public String searchResults(@RequestParam String q, Model model) {
+
+        List<Event> event = new ArrayList<>();
+
+        model.addAttribute("event",event);
+        return "event/index";
     }
 }
