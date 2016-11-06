@@ -88,6 +88,9 @@ public class eventController {
 
         return "eventForm";
     }
+
+    // to be continued: Booking an event.
+    /*
     @RequestMapping("event/book")
     public String bookNewEvent(Model model) {
         // TODO: Add model attributes needed for new form
@@ -101,14 +104,14 @@ public class eventController {
 
         return "event/booked";
     }
-
+*/
     // Add a event
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public String addCategory(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes) {
         // TODO: Add category if valid data was received
         if(result.hasErrors()) {
             // Include validation errors upon redirect
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.category",result);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event",result);
 
             // Add  category if invalid was received
             redirectAttributes.addFlashAttribute("event", event);
@@ -117,14 +120,13 @@ public class eventController {
             return "redirect:/events/add";
         }
 
+        //Hard coding user with ID 1 to be owner of this event
         event.setOwner(userService.findById(Long.valueOf(1)));
         eventService.save(event);
 
         // TODO: Redirect browser to /categories
         return "redirect:/events";
     }
-
-
 
     // Form for editing an existing category
     @RequestMapping("events/{eventId}/edit")
@@ -139,21 +141,5 @@ public class eventController {
         model.addAttribute("submit","Update");
 
         return "eventForm";
-    }
-
-
-    @RequestMapping("/test")
-    public String testPage() {
-        //Þetta home er nafn á html skjali undir resources/templates. Öll html skjöl verða þar.
-        return "testFile";
-    }
-
-    @RequestMapping("/search")
-    public String searchResults(@RequestParam String q, Model model) {
-
-        List<Event> event = new ArrayList<>();
-
-        model.addAttribute("event",event);
-        return "event/index";
     }
 }

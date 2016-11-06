@@ -35,7 +35,20 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
+        // Open a session
+        Session session = sessionFactory.openSession();
 
+        // Begin a transaction
+        session.beginTransaction();
+
+        // Save the category
+        session.saveOrUpdate(user);
+
+        // Commit the transaction
+        session.getTransaction().commit();
+
+        // Close the session
+        session.close();
     }
 
     @Override
