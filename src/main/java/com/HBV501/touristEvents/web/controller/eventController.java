@@ -45,11 +45,8 @@ public class eventController {
     @SuppressWarnings("unchecked")
     @RequestMapping("/")
     public String HomeEvents(Model model) {
-        // TODO: Get all events
-        List<Event> events = eventService.findAll();
 
-        model.addAttribute("events",events);
-        return "layout";
+        return "redirect:/events";
     }
 
     @SuppressWarnings("unchecked")
@@ -136,7 +133,7 @@ public class eventController {
             model.addAttribute("event",eventService.findById(eventId));
         }
         model.addAttribute("colors", Color.values());
-        model.addAttribute("action",String.format("/event/%s",eventId));
+        model.addAttribute("action", "/events");
         model.addAttribute("heading","Edit Event");
         model.addAttribute("submit","Update");
 

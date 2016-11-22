@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -38,7 +39,7 @@ public class userController {
 
     // Add a user
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public String addUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String addUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
         if(result.hasErrors()) {
             // Include validation errors upon redirect
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user",result);
