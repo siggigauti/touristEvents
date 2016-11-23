@@ -54,9 +54,11 @@ public class userController {
     }
 
     @RequestMapping(value = "/user/{name}")
-    public String userName(@PathVariable Long name, Model model){
+    public String userName(@PathVariable Long name, Model model, HttpSession session){
         User user = userService.findById(name);
-        model.addAttribute("name", user.getName());
+        session.setAttribute("myUser", user);
+        User sessionUser = (User) session.getAttribute("myUser");
+        model.addAttribute("name", sessionUser.getName());
         return "username";
     }
 
