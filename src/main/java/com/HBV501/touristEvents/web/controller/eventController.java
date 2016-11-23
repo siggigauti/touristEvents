@@ -70,36 +70,48 @@ public class eventController {
 
     // Form for adding a new event
     @RequestMapping("/events/add")
-    public String formNewCategory(Model model) {
-        if(!model.containsAttribute("event")) {
-            model.addAttribute("event",new Event());
-        }
-        model.addAttribute("colors", Color.values());
-        model.addAttribute("action","/events");
-        model.addAttribute("heading","New Event");
-        model.addAttribute("submit","Add");
+    public String formNewCategory(Model model, HttpSession session) {
 
-        return "eventForm";
+        if(session.getAttribute("sessionUser")!=null){
+            if(!model.containsAttribute("event")) {
+                model.addAttribute("event",new Event());
+            }
+            model.addAttribute("colors", Color.values());
+            model.addAttribute("action","/events");
+            model.addAttribute("heading","New Event");
+            model.addAttribute("submit","Add");
+
+            return "eventForm";
+        }
+        else{
+            return "redirect:/login";
+        }
     }
 
     // Add a event
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public String addCategory(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
-        if(result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event",result);
-            redirectAttributes.addFlashAttribute("event", event);
-            return "redirect:/events/add";
+        if(session.getAttribute("sessionUser")!=null){
+            if(result.hasErrors()) {
+                redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event",result);
+                redirectAttributes.addFlashAttribute("event", event);
+                return "redirect:/events/add";
+            }
+
+            //Hard coding user with ID 1 to be owner of this event
+            //event.setOwner(userService.findById(Long.valueOf(1)));
+
+            //This should work if session has userId
+            User user = (User)session.getAttribute("sessionUser");
+            event.setOwner(user);
+            eventService.save(event);
+
+            return "redirect:/events";
+        }
+        else{
+            return "redirect:/login";
         }
 
-        //Hard coding user with ID 1 to be owner of this event
-        event.setOwner(userService.findById(Long.valueOf(1)));
-
-        //This should work if session has userId
-        /*User user = userService.findById((Long)session.getAttribute("userId"));
-        event.setOwner(user);*/
-        eventService.save(event);
-
-        return "redirect:/events";
     }
 
     // Form for editing an existing category
