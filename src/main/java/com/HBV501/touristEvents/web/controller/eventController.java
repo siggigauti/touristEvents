@@ -71,8 +71,9 @@ public class eventController {
     // Form for adding a new event
     @RequestMapping("/events/add")
     public String formNewCategory(Model model, HttpSession session) {
-
-        if(session.getAttribute("sessionUser")!=null){
+        User sessionuser = (User) session.getAttribute("myUser");
+        System.out.println(sessionuser.getName());
+        if(session.getAttribute("myUser")!=null){
             if(!model.containsAttribute("event")) {
                 model.addAttribute("event",new Event());
             }
@@ -91,7 +92,7 @@ public class eventController {
     // Add a event
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public String addCategory(@Valid Event event, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
-        if(session.getAttribute("sessionUser")!=null){
+        if(session.getAttribute("myUser")!=null){
             if(result.hasErrors()) {
                 redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.event",result);
                 redirectAttributes.addFlashAttribute("event", event);
@@ -102,7 +103,7 @@ public class eventController {
             //event.setOwner(userService.findById(Long.valueOf(1)));
 
             //This should work if session has userId
-            User user = (User)session.getAttribute("sessionUser");
+            User user = (User) session.getAttribute("myUser");
             event.setOwner(user);
             eventService.save(event);
 

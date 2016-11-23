@@ -1,5 +1,6 @@
 package com.HBV501.touristEvents.service;
 
+import com.HBV501.touristEvents.model.Booking;
 import com.HBV501.touristEvents.model.Event;
 import com.HBV501.touristEvents.model.User;
 
@@ -8,4 +9,5 @@ import com.HBV501.touristEvents.model.User;
  */
 public interface BookingService {
     void bookEvent(Event event, User user);
+    void save(Booking booking);
 }

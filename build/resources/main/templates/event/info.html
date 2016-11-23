@@ -17,7 +17,9 @@
         </div>
     </div>
     <div class="col s12 l8">
-        <button th:text="${submit}" type="submit" class="button">book</button>
+        <a th:href="@{|/event/${event.id}/book|}">
+            <button type="submit" class="button">book</button>
+        </a>
         <a th:href="@{/}" class="button">Cancel</a>
     </div>
 </div>

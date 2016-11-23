@@ -70,8 +70,10 @@ public class userController {
 
     @RequestMapping(value ="/login", method = RequestMethod.POST)
     public String loginHandler(HttpSession session, @RequestParam Long id, Model model){
+        System.out.println(id);
         User user = userService.findById(id);
         session.setAttribute("myUser", user);
+
         return "redirect:/events";
     }
 
