@@ -5,9 +5,15 @@ import com.HBV501.touristEvents.model.User;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -20,7 +26,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return null;
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        criteria.from(User.class);
+        List<User> users = session.createQuery(criteria).getResultList();
+        session.close();
+        return users;
     }
 
     @Override
@@ -33,21 +45,13 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+
     @Override
     public void save(User user) {
-        // Open a session
         Session session = sessionFactory.openSession();
-
-        // Begin a transaction
         session.beginTransaction();
-
-        // Save the category
         session.saveOrUpdate(user);
-
-        // Commit the transaction
         session.getTransaction().commit();
-
-        // Close the session
         session.close();
     }
 
@@ -55,4 +59,5 @@ public class UserDaoImpl implements UserDao {
     public void delete(User user) {
 
     }
+
 }

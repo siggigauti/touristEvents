@@ -22,51 +22,27 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public void save(Event event) {
-        // Open a session
         Session session = sessionFactory.openSession();
-
-        // Begin a transaction
         session.beginTransaction();
-
-        // Save the category
         session.saveOrUpdate(event);
-
-        // Commit the transaction
         session.getTransaction().commit();
-
-        // Close the session
         session.close();
     }
 
     @Override
     public void delete(Event event) {
-
+        //Not implemented in this iteration
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> findAll() {
-        // Open a session
         Session session = sessionFactory.openSession();
-
-        // DEPRECATED as of Hibernate 5.2.0
-        // List<Category> categories = session.createCriteria(Category.class).list();
-
-        // Create CriteriaBuilder
         CriteriaBuilder builder = session.getCriteriaBuilder();
-
-        // Create CriteriaQuery
         CriteriaQuery<Event> criteria = builder.createQuery(Event.class);
-
-        // Specify criteria root
         criteria.from(Event.class);
-
-        // Execute query
         List<Event> events = session.createQuery(criteria).getResultList();
-
-        // Close session
         session.close();
-
         return events;
     }
 
