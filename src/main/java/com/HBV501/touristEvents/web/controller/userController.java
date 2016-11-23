@@ -63,5 +63,16 @@ public class userController {
     }
 
     //Bæta við login falli sem tekur /login
+    @RequestMapping("/login")
+    public String loginForm(){
+        return "login";
+    }
+
+    @RequestMapping(value ="/login", method = RequestMethod.POST)
+    public String loginHandler(HttpSession session, @RequestParam Long id, Model model){
+        User user = userService.findById(id);
+        session.setAttribute("myUser", user);
+        return "redirect:/events";
+    }
 
 }
