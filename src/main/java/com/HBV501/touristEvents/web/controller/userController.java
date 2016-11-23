@@ -60,4 +60,6 @@ public class userController {
         return "username";
     }
 
+    //Bæta við login falli sem tekur /login
+
 }
