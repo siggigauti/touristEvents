@@ -19,7 +19,7 @@
             <option th:each="color : ${colors}" th:value="${color.hexCode}" th:text="${color.name}" th:style="|color:${color.hexCode}|">Aqua</option>
         </select>
         <button th:text="${submit}" type="submit" class="button">Add</button>
-        <a th:href="@{/}" class="button">Cancel</a>
+        <a th:href="@{/categories}" class="button">Cancel</a>
     </form>
 <div th:replace="layout :: scripts"></div>
 </body>

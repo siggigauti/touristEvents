@@ -73,6 +73,7 @@ public class userController {
         System.out.println(id);
         User user = userService.findById(id);
         session.setAttribute("myUser", user);
+
         return "redirect:/events";
     }
 

@@ -68,8 +68,6 @@ public class eventController {
         return "event/info";
     }
 
-
-
     // Form for adding a new event
     @RequestMapping("/events/add")
     public String formNewCategory(Model model, HttpSession session) {
