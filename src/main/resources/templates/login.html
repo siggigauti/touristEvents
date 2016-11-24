@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Login </title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: head('login')"></head>
 <body>
-<form th:action="@{/login}" method="post">
-    <div><label> User ID : <input type="text" name="id"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
+<div th:replace="layout :: toppurinn"></div>
+
+
+<div class = "container">
+    <form th:action="@{/login}" method="post">
+
+        <h2> Log In </h2>
+        <div><label> User ID : <input type="text" placeholder="Put in your ID" name="id"/> </label></div>
+        <div><input type="submit" value="Sign In"/></div>
+
+    </form>
+</div>
+<div th:replace="layout :: scripts"></div>
 </body>
 </html>
+
+
+
