@@ -36,9 +36,16 @@ public class bookingController {
             User user = (User) session.getAttribute("myUser");
             Event event = eventService.findById(eventId);
             bookingService.bookEvent(event, user);
+            model.addAttribute("user", user);
+            model.addAttribute("event", event);
 
-            return "event/event";
+            return "booking/result";
         }
        return "redirect:/login";
     }
+
+
+
+
+
 }

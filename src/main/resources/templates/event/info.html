@@ -2,28 +2,52 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="layout :: head('index')"></head>
 <body>
-
 <div th:replace="layout :: toppurinn"></div>
 
+    <div class="container">
+        <table>
+            <tr class="info">
+                <td><h2>Event:</h2></td>
+                <td><h2 th:text="${event.title}" th:style="|color:${event.colorCode}|"></h2></td>
+            </tr>
+        </table>
 
-<div class="event container">
-    <h2 th:text="${event.title}" th:style="|color:${event.colorCode}|"></h2>
-    <div class="row">
-        <div th:each="event : ${event}" class="col s12 l4">
-            <a th:href="@{|/event/${event.id}|}">   </a>
-            <p th:text="${event.title}">Not working?</p>
-            <p th:text="${event.description}">Not working?</p>
-            <p th:text="${event.price}">Not working?</p>
+
+
+
+            <table class="table table-hover">
+                <div th:each="event : ${event}" class="col s6">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Title</th>
+                        <th data-field="cate">Category</th>
+                        <th data-field="desc">Description</th>
+                        <th date-field="location">Location</th>
+                        <th data-field="price">price</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td><p th:text="${event.title}">Not working?</p></td>
+                        <td><p th:text="${event.category}">Not working?</p></td>
+                        <td><p th:text="${event.description}">Not working?</p></td>
+                        <td><p th:text="${event.location}">Not working?</p></td>
+                        <td><p th:text="${event.price}">Not working?</p></td>
+                    </tr>
+                    </tbody>
         </div>
-    </div>
+        </table>
+
     <div class="col s12 l8">
         <a th:href="@{|/event/${event.id}/book|}">
             <button type="submit" class="button">book</button>
         </a>
         <a th:href="@{/}" class="button">Cancel</a>
     </div>
-</div>
+    </div>
 <div th:replace="layout :: scripts"></div>
 </body>
 
 </html>
+

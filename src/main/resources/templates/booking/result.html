@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout :: head('index')"></head>
+<body>
+<div th:replace="layout :: toppurinn"></div>
+
+<div class="container">
+    <h2>Booking confirmed</h2>
+    <p>Company: Tourist Events</p>
+    <p>Reykjavik Iceland</p>
+    <h3>You have booked</h3>
+    <div class="row">
+
+        <table>
+            <div th:each="user : ${user}" class="col s6">
+                <div th:each="event : ${event}">
+
+                <thead>
+                <tr>
+                    <th data-field="id">User Id</th>
+                    <th data-field="name">Title</th>
+                    <th data-field="desc">Description</th>
+                    <th data-field="price">price</th>
+                </tr>
+                </thead>
+
+            <tbody>
+            <tr>
+                <td><p th:text="${user.id}">Not working?</p></td>
+                <td><p th:text="${event.title}">Not working?</p></td>
+                <td><p th:text="${event.description}">Not working?</p></td>
+                <td><p th:text="${event.price}">Not working?</p></td>
+            </tr>
+            </tbody>
+                </div>
+            </div>
+        </table>
+        </div>
+</div>
+
+
+
+<div th:replace="layout :: scripts"></div>
+</body>
+
+</html>
+
